@@ -1,0 +1,88 @@
+
+function resInit(){
+
+    var gctx = document.getElementById("canvasMain").getContext("2d");
+
+    var path = "";
+
+    var res = new UIRes(path+"black/");
+    UI.set("frameLength",30);
+    UI.set("ctx",gctx);
+    UI.set("res",res);
+    UI.start();
+
+    return res;
+}
+
+function resLoader(res,endProc){
+
+    res.loadImgGroup("9img","live/bootSetBg");
+
+	var defaultImgs = [
+        //dialog
+        "dialog/dialog_bg.png",
+        "dialog/password_bg.png",
+        "dialog/password_bg1.png",
+        "dialog/password_inputBox.png",
+        "dialog/password_inputBox1.png",
+        "dialog/ico_ok.png",
+        "dialog/ico_back.png",
+
+        //epg level
+        "level/ico_pu.png",
+        "level/ico_hu.png",
+        "level/ico_fu12.png",
+        "level/ico_fu15.png",
+        "level/ico_bao.png",
+        "level/ico_xian.png",
+        "level/ico_cheng.png"
+
+	];
+    var userImgs = [
+        //recordingByTime
+        "user/pvrScheT_background.jpg",
+        "user/channelList_bg_345x536.png",
+        "user/eventList_bg_820x536.png",
+        "user/folderList_bg_820x500.png",
+        "user/title_bg.png",
+
+        "user/ico_back.png",
+        "user/ico_blue.png",
+        "user/ico_ok.png",
+        "user/ico_red.png",
+        "user/ico_yellow.png",
+        "user/ico_infoKey.png",
+        "user/ico_folder.png",
+
+        "images/ico_eye.png",
+        "images/ico_recording.png",
+        "images/end_dialogue_bg_300x150.png",
+        "user/recordWayBtn_highlight.png",
+        "user/recordWayBtn_normal.png",
+
+        "user/epgList_markselected.png",
+        "user/epgList_selected.png"
+
+    ];
+
+	var imgs = defaultImgs.concat(userImgs);
+    res.load(imgs,endProc);
+}
+function resUserRegister(res){
+    
+}
+
+function resDefaultRegister(res){
+
+}
+
+
+function starter(endProc){
+    var res = resInit();
+    resLoader(res,function(num)
+	{
+        resDefaultRegister(res);
+        resUserRegister(res);
+        endProc(num);
+    });
+}
